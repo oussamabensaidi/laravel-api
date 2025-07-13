@@ -46,7 +46,7 @@ public function update(Request $request, $id) {
         'description' => 'sometimes|string|nullable',
         'terminer' => 'sometimes|boolean',
     ]);
-
+ 
     $updatedTask = $this->taskService->update($id, $validated, $user);
 
     return response()->json(['data' => $updatedTask]);
