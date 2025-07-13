@@ -2,27 +2,35 @@
 namespace App\Services;
 
 use App\Repositories\TaskRepositoryInterface;
+use App\Models\User;
 
-class TaskService {
-    protected $taskRepo;
+class TaskService
+{
+    protected $taskRepository;
 
-    public function __construct(TaskRepositoryInterface $taskRepo) {
-        $this->taskRepo = $taskRepo;
+    public function __construct(TaskRepositoryInterface $taskRepository)
+    {
+        $this->taskRepository = $taskRepository;
     }
 
-    public function getAll() {
-        return $this->taskRepo->all();
+    public function create(array $data, User $user)
+    {
+        return $this->taskRepository->create($data, $user);
     }
 
-    public function create(array $data) {
-        return $this->taskRepo->create($data);
+    public function get($id, User $user)
+    {
+        return $this->taskRepository->find($id, $user);
     }
 
-    public function update($id, array $data) {
-        return $this->taskRepo->update($id, $data);
+    public function update($id, array $data, User $user)
+    {
+        return $this->taskRepository->update($id, $data, $user);
     }
 
-    public function delete($id) {
-        return $this->taskRepo->delete($id);
+    public function delete($id, User $user)
+    {
+        $this->taskRepository->delete($id, $user);
     }
 }
+

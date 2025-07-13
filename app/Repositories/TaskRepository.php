@@ -2,28 +2,36 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Task;
 
-class TaskRepository implements TaskRepositoryInterface {
-    public function all() {
-        return Auth::user()->tasks;
+class TaskRepository implements TaskRepositoryInterface 
+{
+    public function all(User $user) 
+    {
+        return $user->tasks;
     }
 
-    public function find($id) {
-        return Auth::user()->tasks()->findOrFail($id);
+    public function find($id, User $user) 
+    {
+        return $user->tasks()->findOrFail($id);
     }
 
-    public function create(array $data) {
-        return Auth::user()->tasks()->create($data);
+    public function create(array $data, User $user) 
+    {
+        return $user->tasks()->create($data);
     }
 
-    public function update($id, array $data) {
-        $task = $this->find($id);
+    public function update($id, array $data, User $user) 
+    {
+        $task = $this->find($id, $user);
         $task->update($data);
         return $task;
     }
 
-    public function delete($id) {
-        $task = $this->find($id);
+    public function delete($id, User $user) 
+    {
+        $task = $this->find($id, $user);
         $task->delete();
     }
 }

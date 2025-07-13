@@ -13,7 +13,8 @@ class RegisterUserService
             'prenom' => $data['prenom'],
             'email'     => $data['email'],
             'phone'     => $data['phone'],
-            'address'   => $data['address'],
+            // 'address'   => $data['address'],
+            //image here 
             'password'  => Hash::make($data['password']),
         ]);
     }

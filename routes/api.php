@@ -7,7 +7,7 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+})->middleware('auth:api');
 
 
 Route::prefix('auth')->group(function () {
@@ -16,7 +16,7 @@ Route::prefix('auth')->group(function () {
 });
 
 
-Route::middleware('jwt.verify')->prefix('tasks')->group(function () {
+Route::middleware('auth:api')->prefix('tasks')->group(function () {
     Route::get('/', [TaskController::class, 'index']);
     Route::get('/{id}', [TaskController::class, 'show']);
     Route::post('/', [TaskController::class, 'store']);
